@@ -31,6 +31,23 @@ def as_uni_form(form):
     return template.render(c)
 
 @register.filter
+def as_uni_form_dl(form):
+    """ 
+    The original and still very useful way to generate a uni-form form/formset::
+
+        {% load uni_form_tags %}
+
+        <form class="uniForm" action="post">
+            {% csrf_token %}
+            {{ myform|as_uni_form }}
+        </form>
+    """
+ 
+    template = get_template('uni_form/uni_form_dl.html')
+    c = Context({'form': form})
+    return template.render(c)
+
+@register.filter
 def as_uni_errors(form):
     """
     Renders only form errors like django-uni-form::
